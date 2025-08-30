@@ -16,7 +16,8 @@
 .today-time {
   font-size: 1.2rem;
 }
-.today-time strong{
+
+.today-time strong {
   color: #d97706;
 }
 
@@ -42,16 +43,52 @@
 }
 
 /* Job */
-.job-title {
-  font-size: 1.125rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #111827;
-  text-align: left;
-  /* căn trái */
+.job-header {
+  display: flex;
+  justify-content: space-between; /* đẩy 2 thằng sang 2 bên */
+  align-items: center;            /* căn giữa theo trục dọc */
   width: 100%;
-  /* để text-align: left có hiệu lực */
-  padding-left: 8px;
+  padding: 8px 12px;
+  background: #f9f9f9;            /* nền nhẹ (tùy) */
+  border-radius: 8px;
+}
+
+.job-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.job-manager {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+/* Tooltip ẩn mặc định */
+.job-manager::after {
+  content: "Quản lý công việc";
+  position: absolute;
+  bottom: -30px; /* cách icon xuống dưới */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Khi hover thì hiện tooltip */
+.job-manager:hover::after {
+  opacity: 1;
 }
 
 .job-options {

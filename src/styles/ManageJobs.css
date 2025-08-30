@@ -1,0 +1,117 @@
+/* Reset cơ bản */
+.manage-jobs {
+    font-family: Arial, sans-serif;
+    max-width: 375px;
+    /* iPhone XS chiều ngang */
+    margin: 0 auto;
+    padding: 16px;
+    background: #f9f9fb;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 10px auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Tiêu đề */
+.manage-jobs h2 {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Ô nhập */
+.manage-jobs input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Nút thêm */
+.manage-jobs button {
+    width: 100%;
+    padding: 14px;
+    margin: 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.manage-jobs button:hover {
+    background: #43a047;
+}
+
+/* Danh sách */
+.manage-jobs ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+}
+
+.manage-jobs li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Nút xoá */
+.manage-jobs li button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 14px;
+    background: #ff4d4d;
+    border-radius: 8px;
+}
+
+.manage-jobs li button:hover {
+    background: #e53935;
+}
+
+/* Nút quay lại */
+.manage-jobs>button:last-of-type {
+    background: #2196F3;
+    margin-top: 20px;
+}
+
+.manage-jobs>button:last-of-type:hover {
+    background: #1976d2;
+}
+
+/* Responsive riêng cho iPhone XS */
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+
+    .manage-jobs {
+        padding: 20px;
+    }
+
+    .manage-jobs h2 {
+        font-size: 20px;
+    }
+
+    .manage-jobs input[type="text"] {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .manage-jobs button {
+        font-size: 17px;
+        padding: 16px;
+    }
+}

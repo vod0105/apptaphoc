@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db, googleProvider } from "../firebase";
 import "../styles/Home.css";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs,addDoc } from "firebase/firestore";
 
 
 function Home() {
@@ -14,6 +14,7 @@ function Home() {
   const [todayStudyTime, setTodayStudyTime] = useState(126);
   const [user, setUser] = useState(null); // user login state
   const [showLogout, setShowLogout] = useState(false);
+  const [jobs, setJobs] = useState([{ id: 1, name: "General" }]); // jobs from firestore
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -54,6 +55,24 @@ function Home() {
       };
 
       fetchTodayStudyTime();
+
+      const fetchJobs = async () => {
+        if (!user) return;
+        const q = query(collection(db, "jobs"), where("userId", "==", user.uid));
+        const snapshot = await getDocs(q);
+        if (snapshot.empty) {
+          // Nếu chưa có job nào thì tạo "General"
+          const docRef = await addDoc(collection(db, "jobs"), {
+            name: "General",
+            userId: user.uid,
+          });
+
+          setJobs([{ id: docRef.id, name: "General", userId: user.uid }]);
+        } else {
+          setJobs(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }
+      };
+      fetchJobs();
     }
   }, [user]);
 
@@ -103,13 +122,6 @@ function Home() {
     navigate("/history");
   }
 
-  const jobs = [
-    { name: "English", icon: <FaGlobe /> },
-    { name: "Reading", icon: <FaBookOpen /> },
-    { name: "Math", icon: <FaCalculator /> },
-    { name: "Writing", icon: <FaPencilAlt /> },
-  ];
-
   return (
     <div className="app-container">
       <h1 className="main-title">FocusTime</h1>
@@ -139,7 +151,10 @@ function Home() {
       )}
 
       {/* Job chọn */}
-      <h2 className="job-title">Job:</h2>
+      <div className="job-header">
+        <h2 className="job-title">Job:</h2>
+        <button className="job-manager" onClick={() => navigate("/manage-jobs")}>⚙️</button>
+      </div>
       <div className="job-options">
         {jobs.map((job) => (
           <button
@@ -147,7 +162,7 @@ function Home() {
             className={`job-button ${selectedJob === job.name ? "selected" : ""}`}
             onClick={() => setSelectedJob(job.name)}
           >
-            <span className="job-icon">{job.icon}</span>
+            {/* <span className="job-icon">{job.icon}</span> */}
             {job.name}
           </button>
         ))}

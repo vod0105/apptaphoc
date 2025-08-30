@@ -25,17 +25,18 @@
   margin-bottom: 6px;
 }
 
-.con-head h3 {
+.con-head h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
-  color: #111827;
+  color: #d97706;
 }
 
 .con-dot {
   color: #7c3aed; /* tím nhạt */
   font-size: 14px;
 }
+
 
 .con-job {
   margin: 2px 0 6px;
@@ -83,7 +84,7 @@
 }
 
 .dial-time {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 700;
   color: #111827;
 }

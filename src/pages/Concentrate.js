@@ -18,6 +18,9 @@ export default function Concentrate() {
   const [isRunning, setIsRunning] = useState(true);
   const [sessionId, setSessionId] = useState(initSection); // Lưu ID của document phiên học
   const [actualFocusMinutes, setActualFocusMinutes] = useState(0);
+  // Tạo audio object
+  const breakSound = new Audio("/sounds/break.mp3");
+  const focusSound = new Audio("/sounds/focus.mp3");
 
 
 
@@ -118,6 +121,13 @@ export default function Concentrate() {
           };
           updateSession();
 
+          // 🔔 PHÁT ÂM THANH
+          if (periods[currentIndex].type === "focus") {
+            breakSound.play(); // Hết focus thì nghỉ
+          } else {
+            focusSound.play(); // Hết break thì vào học
+          }
+
           // Chuyển sang period tiếp theo
           if (currentIndex < periods.length - 1) {
             const nextIndex = currentIndex + 1;
@@ -137,19 +147,19 @@ export default function Concentrate() {
   // Tách thời gian thành các periods
   const splitIntoPeriods = (totalMinutes) => {
     const result = [];
-    if (totalMinutes <= 60) {
+    if (totalMinutes <= 5) {
       result.push({ type: "focus", minutes: totalMinutes });
       return result;
     }
 
     let remaining = totalMinutes;
     while (remaining > 0) {
-      if (remaining > 60) {
-        result.push({ type: "focus", minutes: 50 });
-        remaining -= 50;
+      if (remaining > 5) {
+        result.push({ type: "focus", minutes: 5 });
+        remaining -= 5;
 
         if (remaining > 0) {
-          const breakMin = Math.min(10, remaining);
+          const breakMin = Math.min(1, remaining);
           result.push({ type: "break", minutes: breakMin });
           remaining -= breakMin;
         }
@@ -173,6 +183,8 @@ export default function Concentrate() {
     totalCurrentSec > 0
       ? (1 - secondsLeft / totalCurrentSec) * 100
       : 100;
+
+
   return (
     <div className="con-container">
       <div className="con-card">
@@ -206,14 +218,17 @@ export default function Concentrate() {
         </div>
 
         {/* Start/Pause button */}
-        <button
-          className={`con-btn ${isRunning ? "pause" : "start"}`}
-          onClick={() => setIsRunning((v) => !v)}
-          aria-label={isRunning ? "Pause" : "Start"}
-        >
-          <span className="con-btn-icon">{isRunning ? "⏸" : "▶"}</span>
-          {isRunning ? "Pause" : "Start"}
-        </button>
+        {!(secondsLeft === 0 && currentIndex === periods.length - 1) && (
+          <button
+            className={`con-btn ${isRunning ? "pause" : "start"}`}
+            onClick={() => setIsRunning((v) => !v)}
+            aria-label={isRunning ? "Pause" : "Start"}
+          >
+            <span className="con-btn-icon">{isRunning ? "⏸" : "▶"}</span>
+            {isRunning ? "Pause" : "Start"}
+          </button>
+        )}
+
 
         {/* Status message */}
         <p className="con-next">

@@ -1,0 +1,160 @@
+/* =================== Base styles (Mobile First) =================== */
+.history-container {
+  padding: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f9fc;
+  min-height: 100vh;
+}
+
+.main-title {
+  text-align: left;
+  color: #2c3e50;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Card danh sách phiên học */
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.session-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  background: #fff;
+  padding: 14px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.session-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.session-job {
+  font-size: 17px;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+}
+
+.session-card p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #555;
+}
+
+/* Chart section */
+.chart-title {
+  margin: 20px 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.chart-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 28px;
+}
+
+/* Progress bar */
+.progress-bar {
+  width: 100%;
+  background-color: #eceff4;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.progress-container {
+  position: relative;
+  margin-top: 8px;
+}
+
+.continue-btn {
+  position: absolute;
+  top: -100px;   /* chỉnh khoảng cách lên xuống */
+  right: 0px; /* chỉnh khoảng cách sang trái/phải */
+  padding: 6px 12px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.continue-btn:hover {
+  background: #45a049;
+}
+
+
+.progress-fill {
+  height: 20px;
+  background: linear-gradient(90deg, #82ca9d, #4caf50);
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  border-radius: 12px;
+  transition: width 0.4s ease;
+}
+
+/* =================== Tablet (>= 600px) =================== */
+@media (min-width: 600px) {
+  .main-title {
+    font-size: 26px;
+    text-align: left;
+  }
+
+  .session-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .session-card {
+    padding: 18px 20px;
+  }
+
+  .chart-title {
+    font-size: 20px;
+    text-align: left;
+  }
+}
+
+/* =================== Desktop (>= 1024px) =================== */
+@media (min-width: 1024px) {
+  .history-container {
+    padding: 32px;
+  }
+
+  .main-title {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .session-list {
+    gap: 20px;
+  }
+
+  .session-card {
+    padding: 20px 24px;
+    border-radius: 18px;
+  }
+
+  .chart-container {
+    padding: 20px;
+  }
+
+  .chart-title {
+    font-size: 22px;
+  }
+}

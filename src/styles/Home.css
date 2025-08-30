@@ -1,0 +1,223 @@
+.app-container {
+  min-height: 50vh;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+  width: 310px;
+  height: 690px;
+  margin: 10px auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.today-time {
+  font-size: 1.2rem;
+}
+.today-time strong{
+  color: #d97706;
+}
+
+/* Tiêu đề chính */
+.main-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #d97706;
+  line-height: 1.3;
+  /* Tăng độ thoáng cho dòng */
+  letter-spacing: 0.03em;
+  /* Khoảng cách chữ nhẹ nhàng */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  /* Đổ bóng nhẹ để nổi bật */
+}
+
+/* Hiệu ứng hover (tùy chọn) */
+.main-title:hover {
+  color: #d89b00;
+  /* Đổi màu nhẹ khi hover */
+}
+
+/* Job */
+.job-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #111827;
+  text-align: left;
+  /* căn trái */
+  width: 100%;
+  /* để text-align: left có hiệu lực */
+  padding-left: 8px;
+}
+
+.job-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.job-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #fff;
+  color: #374151;
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.job-button:hover {
+  background-color: #f3f4f6;
+}
+
+.job-button.selected {
+  border: 2px solid #3b82f6;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Focus time */
+.focus-time {
+  margin-bottom: 2rem;
+}
+
+.focus-time h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.time-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.time-controls button {
+  background-color: #e5e7eb;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.time-controls button:hover {
+  background-color: #d1d5db;
+}
+
+.time-controls .time {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.time-controls .limit {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Start button */
+.start-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #06b6d4;
+  color: #fff;
+  padding: 0.9rem 2rem;
+  border-radius: 9999px;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.start-button:hover {
+  background-color: #0891b2;
+  transform: scale(1.05);
+}
+
+.play-icon {
+  font-size: 1rem;
+}
+
+/* History button */
+.history-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.history-button:hover {
+  color: #111827;
+}
+
+.history-icon {
+  font-size: 1rem;
+}
+
+.login-button {
+  background: #06b6d4;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.user-section {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #ddd;
+}
+
+.logout-button {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}

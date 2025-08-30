@@ -1,0 +1,133 @@
+.con-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #c7d2fe, #e0f2fe, #fef9c3);
+
+}
+
+.con-card {
+  width: 320px;
+  background: #fff;
+  padding: 18px 18px 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.con-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.con-head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.con-dot {
+  color: #7c3aed; /* tím nhạt */
+  font-size: 14px;
+}
+
+.con-job {
+  margin: 2px 0 6px;
+  font-size: 17px;
+  color: #374151;
+}
+
+.con-sub {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Donut progress ring */
+.dial {
+  --pct: 0%;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: conic-gradient(#3b82f6 var(--pct), #e5e7eb 0);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial::after {
+  content: "";
+  position: absolute;
+  inset: 20px;             /* độ dày viền progress */
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px #f3f4f6; /* viền trong mảnh */
+}
+
+.dial-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-time {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Nút Start / Pause (kiểu pill có viền đen giống ảnh) */
+.con-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 1px solid #111827;           /* viền đen mảnh */
+  background: #3b82f6;                 /* xanh dương */
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+  transition: transform .08s ease, filter .2s ease;
+}
+.con-btn:hover { filter: brightness(0.95); }
+.con-btn:active { transform: translateY(1px); }
+
+.con-btn.start { background: #06b6d4; }
+.con-btn.pause { background: #d97706; box-shadow: 0 2px 8px rgba(217,119,6,0.35); }
+
+.con-btn-icon { font-size: 14px; line-height: 1; }
+
+.con-next {
+  margin-top: 12px;
+  font-size: 20px;
+  color: #6b7280;
+}
+
+.con-quote {
+  margin-top: 20px;
+  padding: 12px 16px;
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #1e293b;
+  background: linear-gradient(135deg, #e0f2fe, #fef9c3);
+  border-left: 5px solid #3b82f6;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}

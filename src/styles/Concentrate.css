@@ -12,7 +12,7 @@
   background: #fff;
   padding: 18px 18px 24px;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -33,7 +33,8 @@
 }
 
 .con-dot {
-  color: #7c3aed; /* tím nhạt */
+  color: #7c3aed;
+  /* tím nhạt */
   font-size: 14px;
 }
 
@@ -50,14 +51,23 @@
   color: #6b7280;
 }
 
+.con-timer-wrapper {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
 /* Donut progress ring */
 .dial {
   --pct: 0%;
-  width: 250px;
-  height: 250px;
+  width: 270px;
+  height: 270px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  background: conic-gradient(#3b82f6 var(--pct), #e5e7eb 0);
+  background: conic-gradient(#ddb513 var(--pct), #e5e7eb 0);
   position: relative;
   display: flex;
   align-items: center;
@@ -67,10 +77,12 @@
 .dial::after {
   content: "";
   position: absolute;
-  inset: 20px;             /* độ dày viền progress */
+  inset: 30px;
+  /* độ dày viền progress */
   background: #fff;
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px #f3f4f6; /* viền trong mảnh */
+  box-shadow: inset 0 0 0 1px #f3f4f6;
+  /* viền trong mảnh */
 }
 
 .dial-inner {
@@ -84,38 +96,140 @@
 }
 
 .dial-time {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
   color: #111827;
 }
 
 /* Nút Start / Pause (kiểu pill có viền đen giống ảnh) */
-.con-btn {
-  display: inline-flex;
+.con-controls{
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 9999px;
-  border: 1px solid #111827;           /* viền đen mảnh */
-  background: #3b82f6;                 /* xanh dương */
+  gap: 12px;
+}
+.con-btn {
+  width: 40px;
+  height: 40px;
+  padding: 5px 5px;
+  border-radius: 9999px;  
+  border: 1px solid #516182;
+  /* viền đen mảnh */
+  background: #3b82f6;
+  /* xanh dương */
   color: #fff;
   font-weight: 700;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
   transition: transform .08s ease, filter .2s ease;
 }
-.con-btn:hover { filter: brightness(0.95); }
-.con-btn:active { transform: translateY(1px); }
 
-.con-btn.start { background: #06b6d4; }
-.con-btn.pause { background: #d97706; box-shadow: 0 2px 8px rgba(217,119,6,0.35); }
+.con-btn:hover {
+  filter: brightness(0.95);
+}
 
-.con-btn-icon { font-size: 14px; line-height: 1; }
+.con-btn:active {
+  transform: translateY(1px);
+}
+
+.con-btn.start {
+  background: #06b6d4;
+}
+
+.con-btn.pause {
+  background: #ec9925;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+}
+
+.con-btn-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.menu-wrapper {
+  position: relative;
+  width: 28.4px;
+  height: 28.4px;
+  padding: 5px 5px;
+  border-radius: 50%;
+  border: 1px solid #c5d0e3;
+  /* viền đen mảnh */
+  background: #c5d3e9;
+  /* xanh dương */
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+  transition: transform .08s ease, filter .2s ease;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 5px;
+}
+
+.menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-dropdown button {
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-dropdown button:hover {
+  background: #f0f0f0;
+}
+
+/* Candle style */
+.candle {
+  width: 95px;
+  height: 240px;
+  background: #eee;
+  margin: auto;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.candle .wax {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #f9c90b;
+  transition: height 1s linear;
+}
+
+.candle .flame {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgb(255, 106, 0) 60%, transparent 70%);
+  border-radius: 50%;
+  animation: flicker 0.5s infinite alternate;
+}
 
 .con-next {
   margin-top: 12px;
-  font-size: 20px;
+  font-size: 23px;
   color: #6b7280;
 }
 
@@ -130,5 +244,25 @@
   border-left: 5px solid #3b82f6;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tree-trunk {
+  stroke: #2f6b2f;
+  filter: drop-shadow(0 0 2px #1a3d1a);
+}
+
+.tree-branch {
+  stroke: #3d7a3d;
+  stroke-dasharray: 2 2; /* ví dụ làm nhánh chấm chấm */
+}
+
+@keyframes flicker {
+  from {
+    transform: translateX(-50%) scale(1);
+  }
+
+  to {
+    transform: translateX(-50%) scale(1.2);
+  }
 }

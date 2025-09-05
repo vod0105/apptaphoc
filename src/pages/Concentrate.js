@@ -4,6 +4,7 @@ import { db, auth } from "../firebase";
 import { collection, setDoc, updateDoc, doc, getDoc, Timestamp } from "firebase/firestore";
 import "../styles/Concentrate.css";
 import { MoreVertical } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Concentrate() {
   const { state } = useLocation();
@@ -40,6 +41,9 @@ export default function Concentrate() {
     "Đi chậm không sao, miễn là đừng dừng lại.",
     "Người chiến thắng là người không bao giờ bỏ cuộc."
   ];
+
+    const { theme, toggleTheme } = useTheme();
+  
 
   // Random 1 câu khi load trang
   useEffect(() => {
@@ -394,6 +398,11 @@ export default function Concentrate() {
               : "Đang tạm dừng"}
         </p>
         <p className="con-quote">💡 {quote}</p>
+
+        {/* Toggle theme */}
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
       </div>
     </div>
   );

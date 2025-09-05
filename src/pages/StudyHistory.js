@@ -122,6 +122,28 @@ function StudyHistory() {
         });
     }
 
+    const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="custom-tooltip">
+                    <p><b>{label}</b></p>
+                    {payload.map((entry, index) => {
+                        const minutes = entry.value || 0;
+                        const h = Math.floor(minutes / 60);
+                        const m = minutes % 60;
+                        return (
+                            <p key={index} style={{ color: entry.color }}>
+                                {entry.name}: {h > 0 ? `${h}h` : ""} {m > 0 ? `${m} phút` : "0 phút"}
+                            </p>
+                        );
+                    })}
+                </div>
+            );
+        }
+        return null;
+    };
+
+
     return (
         <div className="history-container">
             <h1 className="main-title">📖 Lịch sử học tập</h1>
@@ -174,8 +196,8 @@ function StudyHistory() {
                     <LineChart data={dailyData}>
                         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                         <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
+                        <YAxis tickFormatter={(value) => `${Math.floor(value / 60)}h`} />
+                        <Tooltip content={<CustomTooltip />} />
                         <Legend />
                         <Line type="monotone" dataKey="actual" stroke="#82ca9d" name="Thực tế" />
                         <Line type="monotone" dataKey="remaining" stroke="#ff6b6b" name="Còn thiếu" />

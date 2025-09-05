@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db, googleProvider } from "../firebase";
 import "../styles/Home.css";
-import { collection, query, where, getDocs,addDoc } from "firebase/firestore";
+import defaultAvatar from "../assets/defaultAvatar.jpg";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { useTheme } from "../context/ThemeContext";
 
 
 function Home() {
@@ -15,6 +17,9 @@ function Home() {
   const [user, setUser] = useState(null); // user login state
   const [showLogout, setShowLogout] = useState(false);
   const [jobs, setJobs] = useState([{ id: 1, name: "General" }]); // jobs from firestore
+
+  const { theme, toggleTheme } = useTheme();
+  
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -102,7 +107,7 @@ function Home() {
   };
 
   const handleTimeChange = (time) => {
-    setFocusTime((prev) => Math.max(15, Math.min(60, prev + time)));
+    setFocusTime((prev) => Math.max(15, prev + time));
   };
 
   const handleStart = () => {
@@ -137,7 +142,7 @@ function Home() {
       ) : (
         <div className="user-section">
           <img
-            src={user.photoURL}
+            src={user.photoURL || defaultAvatar}
             alt="avatar"
             className="user-avatar"
             onClick={() => setShowLogout((prev) => !prev)}
@@ -186,6 +191,11 @@ function Home() {
       </button>
       <button className="history-button" onClick={handleHistory}>
         <FaHistory className="history-icon" /> History
+      </button>
+
+      {/* Toggle theme */}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {theme === "light" ? "🌙" : "☀️"}
       </button>
     </div>
   );

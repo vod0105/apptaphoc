@@ -1,6 +1,8 @@
 .app-container {
+  position: relative;
   min-height: 50vh;
-  background-color: #f9fafb;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +20,7 @@
 }
 
 .today-time strong {
-  color: #d97706;
+  color: var(--heading-color);
 }
 
 /* Tiêu đề chính */
@@ -27,37 +29,30 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #d97706;
+  color: var(--text-color) !important;
   line-height: 1.3;
-  /* Tăng độ thoáng cho dòng */
   letter-spacing: 0.03em;
-  /* Khoảng cách chữ nhẹ nhàng */
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  /* Đổ bóng nhẹ để nổi bật */
 }
 
-/* Hiệu ứng hover (tùy chọn) */
 .main-title:hover {
   color: #d89b00;
-  /* Đổi màu nhẹ khi hover */
 }
 
 /* Job */
 .job-header {
   display: flex;
-  justify-content: space-between; /* đẩy 2 thằng sang 2 bên */
-  align-items: center;            /* căn giữa theo trục dọc */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 8px 12px;
-  background: #f9f9f9;            /* nền nhẹ (tùy) */
-  border-radius: 8px;
 }
 
 .job-title {
   margin: 0;
   font-size: 18px;
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
 }
 
 .job-manager {
@@ -67,15 +62,21 @@
   font-size: 18px;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: var(--icon-color);
 }
-/* Tooltip ẩn mặc định */
+
+.job-manager:hover {
+  color: var(--icon-hover);
+}
+
+/* Tooltip */
 .job-manager::after {
   content: "Quản lý công việc";
   position: absolute;
-  bottom: -30px; /* cách icon xuống dưới */
+  bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
+  background: var(--icon-color);
   color: #fff;
   padding: 5px 8px;
   border-radius: 6px;
@@ -85,8 +86,6 @@
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-
-/* Khi hover thì hiện tooltip */
 .job-manager:hover::after {
   opacity: 1;
 }
@@ -104,22 +103,20 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: #fff;
-  color: #374151;
+  background-color: var(--card-bg);
+  color: var(--text-color);
   padding: 0.75rem;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 500;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 .job-button:hover {
-  background-color: #f3f4f6;
+  background-color: var(--hover-bg);
 }
-
 .job-button.selected {
   border: 2px solid #3b82f6;
   background-color: #eff6ff;
@@ -135,7 +132,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: #111827;
+  color: var(--text-color);
 }
 
 .time-controls {
@@ -147,7 +144,8 @@
 }
 
 .time-controls button {
-  background-color: #e5e7eb;
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
   padding: 0.4rem 0.9rem;
   border-radius: 9999px;
   font-size: 1.25rem;
@@ -156,20 +154,17 @@
   cursor: pointer;
   transition: background-color 0.25s ease;
 }
-
 .time-controls button:hover {
-  background-color: #d1d5db;
+  background-color: var(--btn-secondary-hover);
 }
-
 .time-controls .time {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-color);
 }
-
 .time-controls .limit {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 /* Start button */
@@ -178,8 +173,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background-color: #06b6d4;
-  color: #fff;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 0.9rem 2rem;
   border-radius: 9999px;
   font-size: 1.125rem;
@@ -189,12 +184,10 @@
   margin-bottom: 1.5rem;
   transition: background-color 0.3s ease, transform 0.1s ease;
 }
-
 .start-button:hover {
-  background-color: #0891b2;
+  background-color: var(--btn-primary-hover);
   transform: scale(1.05);
 }
-
 .play-icon {
   font-size: 1rem;
 }
@@ -205,7 +198,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: #374151;
+  color: var(--icon-color);
   font-size: 0.9rem;
   font-weight: 500;
   border: none;
@@ -213,48 +206,64 @@
   cursor: pointer;
   transition: color 0.2s ease;
 }
-
 .history-button:hover {
-  color: #111827;
+  color: var(--icon-hover);
 }
-
 .history-icon {
   font-size: 1rem;
 }
 
+/* Login */
 .login-button {
-  background: #06b6d4;
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 10px 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
 }
+.login-button:hover {
+  background: var(--btn-primary-hover);
+}
 
+/* User */
 .user-section {
   position: relative;
   display: inline-block;
   margin-bottom: 0px;
 }
-
 .user-avatar {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
 }
-
 .logout-button {
   position: absolute;
   top: 60px;
   left: 0;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  color: #333;
+  color: var(--text-color);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--icon-color);
+}
+.theme-toggle:hover {
+  color: var(--icon-hover);
 }

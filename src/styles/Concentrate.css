@@ -8,8 +8,10 @@
 }
 
 .con-card {
+  position: relative;
   width: 320px;
-  background: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
   padding: 18px 18px 24px;
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
@@ -29,7 +31,7 @@
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #d97706;
+  color: var(--text-color);
 }
 
 .con-dot {
@@ -40,9 +42,8 @@
 
 
 .con-job {
-  margin: 2px 0 6px;
+  margin: 20px 0 6px;
   font-size: 17px;
-  color: #374151;
 }
 
 .con-sub {
@@ -67,7 +68,9 @@
   height: 270px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  background: conic-gradient(#ddb513 var(--pct), #e5e7eb 0);
+  background: conic-gradient(    var(--chart-1-start) 0,
+    var(--chart-1-end) var(--pct),
+    var(--chart-2) var(--pct) 100%);
   position: relative;
   display: flex;
   align-items: center;
@@ -79,9 +82,9 @@
   position: absolute;
   inset: 30px;
   /* độ dày viền progress */
-  background: #fff;
+  background: var(--bg-color);
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px #f3f4f6;
+  box-shadow: inset 0 0 0 1px var(--chart-2);
   /* viền trong mảnh */
 }
 
@@ -98,7 +101,6 @@
 .dial-time {
   font-size: 50px;
   font-weight: 700;
-  color: #111827;
 }
 
 /* Nút Start / Pause (kiểu pill có viền đen giống ảnh) */
@@ -230,7 +232,6 @@
 .con-next {
   margin-top: 12px;
   font-size: 23px;
-  color: #6b7280;
 }
 
 .con-quote {
@@ -248,7 +249,7 @@
 }
 
 .tree-trunk {
-  stroke: #2f6b2f;
+  stroke: #4CAF50;
   filter: drop-shadow(0 0 2px #1a3d1a);
 }
 

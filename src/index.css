@@ -1,3 +1,70 @@
+/* 🌞 Light Theme */
+body.light {
+  /* Nền */
+  --bg-color: #f9fafb;       /* nền chính */
+  --card-bg: #ffffff;        /* nền thẻ / button */
+  --hover-bg: #f3f4f6;       /* nền hover */
+  --border-color: #e5e7eb;
+
+  /* Chữ */
+  --text-color: #111827;     /* chữ chính */
+  --text-muted: #6b7280;     /* chữ phụ */
+  --heading-color: #d97706;  /* tiêu đề nổi bật (cam) */
+
+  /* Nút */
+  --btn-primary-bg: #06b6d4;
+  --btn-primary-hover: #0891b2;
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: #e5e7eb;
+  --btn-secondary-hover: #d1d5db;
+  --btn-secondary-text: #111827;
+
+  /* Icon / trạng thái */
+  --icon-color: #374151;
+  --icon-hover: #111827;
+
+  /* Màu progress */
+  --chart-1-start: #4DA6FF; /* xanh lam sáng */
+  --chart-1-end: #00C9A7;   /* xanh ngọc sáng */
+  --chart-2: #E5E7EB;       /* xám nhạt */
+  --bg-color: #ffffff;      /* nền trong vòng (trắng) */
+
+}
+
+/* 🌚 Dark Theme */
+body.dark {
+  /* Nền */
+  --bg-color: #1e293b;
+  --card-bg: #334155;
+  --hover-bg: #475569;
+  --border-color: #4b5563;
+
+  /* Chữ */
+  --text-color: #f1f5f9;
+  --text-muted: #9ca3af;
+  --heading-color: #e77a0e;  /* vàng nổi bật */
+
+  /* Nút */
+  --btn-primary-bg: #0ea5e9;
+  --btn-primary-hover: #0284c7;
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: #475569;
+  --btn-secondary-hover: #64748b;
+  --btn-secondary-text: #f1f5f9;
+
+  /* Icon / trạng thái */
+  --icon-color: #e2e8f0;
+  --icon-hover: #ffffff;
+
+  /* chart */
+  --chart-1-start: #4DA6FF; /* xanh lam */
+  --chart-1-end: #00C9A7;   /* xanh ngọc */
+  --chart-2: #3A4A5E;       /* xám đậm */
+  --bg-color: #0f1a2e;      /* nền trong vòng */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

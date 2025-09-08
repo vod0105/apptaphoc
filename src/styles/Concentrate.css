@@ -1,15 +1,11 @@
-.con-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #c7d2fe, #e0f2fe, #fef9c3);
-
-}
-
 .con-card {
   position: relative;
+  min-height: 100vh;
   width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
   background: var(--bg-color);
   color: var(--text-color);
   padding: 18px 18px 24px;
@@ -53,7 +49,7 @@
 }
 
 .con-timer-wrapper {
-  height: 300px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,13 +60,13 @@
 /* Donut progress ring */
 .dial {
   --pct: 0%;
-  width: 270px;
-  height: 270px;
+  width: 300px;
+  height: 300px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  background: conic-gradient(    var(--chart-1-start) 0,
-    var(--chart-1-end) var(--pct),
-    var(--chart-2) var(--pct) 100%);
+  background: conic-gradient(var(--chart-1-start) 0,
+      var(--chart-1-end) var(--pct),
+      var(--chart-2) var(--pct) 100%);
   position: relative;
   display: flex;
   align-items: center;
@@ -80,7 +76,7 @@
 .dial::after {
   content: "";
   position: absolute;
-  inset: 30px;
+  inset: 38px;
   /* độ dày viền progress */
   background: var(--bg-color);
   border-radius: 50%;
@@ -99,22 +95,23 @@
 }
 
 .dial-time {
-  font-size: 50px;
+  font-size: 65px;
   font-weight: 700;
 }
 
 /* Nút Start / Pause (kiểu pill có viền đen giống ảnh) */
-.con-controls{
+.con-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
 }
+
 .con-btn {
   width: 40px;
   height: 40px;
   padding: 5px 5px;
-  border-radius: 9999px;  
+  border-radius: 9999px;
   border: 1px solid #516182;
   /* viền đen mảnh */
   background: #3b82f6;
@@ -137,11 +134,12 @@
 
 .con-btn.start {
   background: #06b6d4;
+  border: none;
 }
 
 .con-btn.pause {
   background: #ec9925;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
+  border: none;
 }
 
 .con-btn-icon {
@@ -199,8 +197,8 @@
 
 /* Candle style */
 .candle {
-  width: 95px;
-  height: 240px;
+  width: 105px;
+  height: 280px;
   background: #eee;
   margin: auto;
   position: relative;
@@ -255,7 +253,8 @@
 
 .tree-branch {
   stroke: #3d7a3d;
-  stroke-dasharray: 2 2; /* ví dụ làm nhánh chấm chấm */
+  stroke-dasharray: 2 2;
+  /* ví dụ làm nhánh chấm chấm */
 }
 
 @keyframes flicker {

@@ -5,7 +5,7 @@
     /* iPhone XS chiều ngang */
     margin: 0 auto;
     padding: 16px;
-    background: #f9f9fb;
+    background: var(--bg-color);
     min-height: 100vh;
     box-sizing: border-box;
     margin: 10px auto;
@@ -18,7 +18,7 @@
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: var(--text-color);
 }
 
 /* Ô nhập */

@@ -72,7 +72,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #c7d2fe, #e0f2fe, #fef9c3);
+  /* background: linear-gradient(135deg, #c7d2fe, #e0f2fe, #fef9c3); */
+  background: var(--bg-color);
 }
 
 code {

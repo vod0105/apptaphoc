@@ -1,10 +1,9 @@
 .con-card {
   position: relative;
-  min-height: 100vh;
   width: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
   margin: 0 auto;
   background: var(--bg-color);
   color: var(--text-color);
@@ -18,7 +17,6 @@
 
 .con-head {
   display: flex;
-  align-items: center;
   gap: 8px;
   margin-bottom: 6px;
 }
@@ -27,6 +25,7 @@
   margin: 0;
   font-size: 22px;
   font-weight: 700;
+  
   color: var(--text-color);
 }
 
@@ -34,6 +33,7 @@
   color: #7c3aed;
   /* tím nhạt */
   font-size: 14px;
+  padding-top: 7px;
 }
 
 

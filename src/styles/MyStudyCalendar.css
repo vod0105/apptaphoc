@@ -1,0 +1,110 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* nền mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  background: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  width: 360px;
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #f2b40bdf;
+}
+
+.modal input,
+.modal select {
+  display: block;
+  width: 100%;             /* bằng nhau */
+  box-sizing: border-box;  /* tính cả padding + border vào width */
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+  /* appearance: none;        bỏ style mặc định của select (Chrome/Safari) */
+  /* -moz-appearance: none;   bỏ style mặc định (Firefox) */
+  /* -webkit-appearance: none; */
+}
+
+.modal input:focus,
+.modal select:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
+}
+
+.days-of-week {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.days-of-week label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.modal button.save {
+  background: #00bcd4;
+  color: white;
+}
+
+.modal button.save:hover {
+  background: #0097a7;
+}
+
+.modal button.cancel {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.modal button.cancel:hover {
+  background: #e0e0e0;
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

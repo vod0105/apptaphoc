@@ -1,5 +1,5 @@
 import React, { useState, useEffect, use } from "react";
-import { FaBookOpen, FaPencilAlt, FaGlobe, FaCalculator, FaHistory, FaPlay } from "react-icons/fa";
+import { FaBookOpen, FaPencilAlt, FaGlobe, FaCalculator, FaHistory, FaPlay, FaCalendar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db, googleProvider } from "../firebase";
@@ -19,7 +19,7 @@ function Home() {
   const [jobs, setJobs] = useState([{ id: 1, name: "General" }]); // jobs from firestore
 
   const { theme, toggleTheme } = useTheme();
-  
+
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (currentUser) => {
@@ -127,6 +127,14 @@ function Home() {
     navigate("/history");
   }
 
+  const handleCalender = () => {
+    if (!user) {
+      alert("Vui lòng đăng nhập để xem lịch sử học tập!");
+      return;
+    }
+    navigate("/my-study-calendar");
+  }
+
   return (
     <div className="app-container">
       <h1 className="main-title">FocusTime</h1>
@@ -192,7 +200,9 @@ function Home() {
       <button className="history-button" onClick={handleHistory}>
         <FaHistory className="history-icon" /> History
       </button>
-
+      <button className="calender-button" onClick={handleCalender}>
+        <FaCalendar color="#2a98edff" className="calender-icon" />
+      </button>
       {/* Toggle theme */}
       <button className="theme-toggle" onClick={toggleTheme}>
         {theme === "light" ? "🌙" : "☀️"}

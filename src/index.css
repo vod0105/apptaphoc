@@ -1,7 +1,44 @@
+:root {
+  --fc-border-color: #b9cdf5;
+  --fc-page-bg-color: #ffffff;
+  --fc-neutral-bg-color: #f9fafb;
+
+  --fc-button-bg-color: #3e8af6;
+  --fc-button-border-color: #3e8af6;
+  --fc-button-text-color: #fff;
+  --fc-button-hover-bg-color: #66a4fa;
+
+  --fc-today-bg-color: #fef3c7;
+  --fc-event-bg-color: #22c55e;
+  --fc-event-text-color: #fff;
+}
+
+.fc {
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-top: 12px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.fc .fc-daygrid-event {
+  margin: 3px 0;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+
 /* 🌞 Light Theme */
 body.light {
   /* Nền */
   --bg-color: #f9fafb;       /* nền chính */
+  --bg-max-color: #e2e5e8;   /* nền sáng nhất */
   --card-bg: #ffffff;        /* nền thẻ / button */
   --hover-bg: #f3f4f6;       /* nền hover */
   --border-color: #e5e7eb;
@@ -36,9 +73,10 @@ body.light {
 body.dark {
   /* Nền */
   --bg-color: #1e293b;
-  --card-bg: #334155;
+  --bg-max-color: #273347;
+  --card-bg: #566b89;
   --hover-bg: #475569;
-  --border-color: #4b5563;
+  --border-color: #9aabc4;
 
   /* Chữ */
   --text-color: #f1f5f9;
@@ -73,7 +111,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background: linear-gradient(135deg, #c7d2fe, #e0f2fe, #fef9c3); */
-  background: var(--bg-color);
+  background: var(--bg-max-color);
 }
 
 code {

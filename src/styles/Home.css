@@ -213,7 +213,7 @@
   font-size: 1rem;
 }
 
-.calender-button {
+.calendar-button {
   margin-top: 10px;
   background: #f1f5f9;
   border: none;
@@ -222,12 +222,20 @@
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar-button:hover {
   background: #e2e8f0;
 }
 
+.calendar-icon{
+  font-size: 1.2rem;
+
+}
 
 /* Login */
 .login-button {

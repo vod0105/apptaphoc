@@ -200,8 +200,8 @@ function Home() {
       <button className="history-button" onClick={handleHistory}>
         <FaHistory className="history-icon" /> History
       </button>
-      <button className="calender-button" onClick={handleCalender}>
-        <FaCalendar color="#2a98edff" className="calender-icon" />
+      <button className="calendar-button" onClick={handleCalender}>
+        <FaCalendar color="#2a98edff" className="calendar-icon" />
       </button>
       {/* Toggle theme */}
       <button className="theme-toggle" onClick={toggleTheme}>

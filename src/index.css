@@ -1,3 +1,88 @@
+/* 🌞 Light Theme */
+body.light {
+  /* Nền */
+  --bg-color: #f9fafb;
+  /* nền chính */
+  --bg-max-color: #e2e5e8;
+  /* nền sáng nhất */
+  --card-bg: #ffffff;
+  /* nền thẻ / button */
+  --hover-bg: #f3f4f6;
+  /* nền hover */
+  --border-color: #e5e7eb;
+
+  /* Chữ */
+  --text-color: #111827;
+  /* chữ chính */
+  --text-muted: #6b7280;
+  /* chữ phụ */
+  --heading-color: #d97706;
+  /* tiêu đề nổi bật (cam) */
+
+  /* Nút */
+  --btn-primary-bg: #06b6d4;
+  --btn-primary-hover: #0891b2;
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: #e5e7eb;
+  --btn-secondary-hover: #d1d5db;
+  --btn-secondary-text: #111827;
+
+  /* Icon / trạng thái */
+  --icon-color: #374151;
+  --icon-hover: #111827;
+
+  /* Màu progress */
+  --chart-1-start: #4DA6FF;
+  /* xanh lam sáng */
+  --chart-1-end: #00C9A7;
+  /* xanh ngọc sáng */
+  --chart-2: #E5E7EB;
+  /* xám nhạt */
+  --bg-color: #ffffff;
+  /* nền trong vòng (trắng) */
+
+}
+
+/* 🌚 Dark Theme */
+body.dark {
+  /* Nền */
+  --bg-color: #1e293b;
+  --bg-max-color: #273347;
+  --card-bg: #566b89;
+  --hover-bg: #475569;
+  --border-color: #9aabc4;
+
+  /* Chữ */
+  --text-color: #f1f5f9;
+  --text-muted: #9ca3af;
+  --heading-color: #e77a0e;
+  /* vàng nổi bật */
+
+  /* Nút */
+  --btn-primary-bg: #0ea5e9;
+  --btn-primary-hover: #0284c7;
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: #475569;
+  --btn-secondary-hover: #64748b;
+  --btn-secondary-text: #f1f5f9;
+
+  /* Icon / trạng thái */
+  --icon-color: #e2e8f0;
+  --icon-hover: #ffffff;
+
+  /* chart */
+  --chart-1-start: #4DA6FF;
+  /* xanh lam */
+  --chart-1-end: #00C9A7;
+  /* xanh ngọc */
+  --chart-2: #3A4A5E;
+  /* xám đậm */
+  --bg-color: #0f1a2e;
+  /* nền trong vòng */
+}
+
 :root {
   --fc-border-color: #b9cdf5;
   --fc-page-bg-color: #ffffff;
@@ -16,14 +101,31 @@
 .fc {
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-top: 12px;
+}
+
+.fc .fc-day-today {
+  color: var(--btn-primary-bg);
+  /* xanh */
+}
+
+.fc .fc-day-today .fc-daygrid-event {
+  color: #1e293b !important;
+  /* đen */
 }
 
 .fc .fc-toolbar-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-color);
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: var(--text-color);
+  /* trắng */
+  font-weight: 600;
+  /* in đậm cho dễ nhìn */
 }
 
 .fc .fc-daygrid-event {
@@ -31,76 +133,47 @@
   padding: 2px 6px;
   border-radius: 6px;
   font-size: 0.85rem;
+  color: #22c55e;
 }
 
+@media (max-width: 430px) {
+  .fc {
+    height: 100vh !important;
+    /* dài hết màn hình */
+    max-height: 100vh !important;
+    padding: 8px;
+    /* giảm padding */
+    font-size: 0.8rem;
+    /* chữ nhỏ gọn */
+  }
 
-/* 🌞 Light Theme */
-body.light {
-  /* Nền */
-  --bg-color: #f9fafb;       /* nền chính */
-  --bg-max-color: #e2e5e8;   /* nền sáng nhất */
-  --card-bg: #ffffff;        /* nền thẻ / button */
-  --hover-bg: #f3f4f6;       /* nền hover */
-  --border-color: #e5e7eb;
+  /* Thu nhỏ header */
+  .fc .fc-toolbar-title {
+    font-size: 0.9rem;
+  }
 
-  /* Chữ */
-  --text-color: #111827;     /* chữ chính */
-  --text-muted: #6b7280;     /* chữ phụ */
-  --heading-color: #d97706;  /* tiêu đề nổi bật (cam) */
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.7rem;
+    /* Sun, Mon nhỏ lại */
+    padding: 2px;
+  }
 
-  /* Nút */
-  --btn-primary-bg: #06b6d4;
-  --btn-primary-hover: #0891b2;
-  --btn-primary-text: #ffffff;
+  /* Ngày trong ô */
+  .fc .fc-daygrid-day-number {
+    font-size: 0.7rem;
+    /* số ngày nhỏ lại */
+  }
 
-  --btn-secondary-bg: #e5e7eb;
-  --btn-secondary-hover: #d1d5db;
-  --btn-secondary-text: #111827;
+  /* Event */
+  .fc .fc-daygrid-event {
+    font-size: 0.7rem;
+    padding: 1px 3px;
+  }
 
-  /* Icon / trạng thái */
-  --icon-color: #374151;
-  --icon-hover: #111827;
-
-  /* Màu progress */
-  --chart-1-start: #4DA6FF; /* xanh lam sáng */
-  --chart-1-end: #00C9A7;   /* xanh ngọc sáng */
-  --chart-2: #E5E7EB;       /* xám nhạt */
-  --bg-color: #ffffff;      /* nền trong vòng (trắng) */
-
-}
-
-/* 🌚 Dark Theme */
-body.dark {
-  /* Nền */
-  --bg-color: #1e293b;
-  --bg-max-color: #273347;
-  --card-bg: #566b89;
-  --hover-bg: #475569;
-  --border-color: #9aabc4;
-
-  /* Chữ */
-  --text-color: #f1f5f9;
-  --text-muted: #9ca3af;
-  --heading-color: #e77a0e;  /* vàng nổi bật */
-
-  /* Nút */
-  --btn-primary-bg: #0ea5e9;
-  --btn-primary-hover: #0284c7;
-  --btn-primary-text: #ffffff;
-
-  --btn-secondary-bg: #475569;
-  --btn-secondary-hover: #64748b;
-  --btn-secondary-text: #f1f5f9;
-
-  /* Icon / trạng thái */
-  --icon-color: #e2e8f0;
-  --icon-hover: #ffffff;
-
-  /* chart */
-  --chart-1-start: #4DA6FF; /* xanh lam */
-  --chart-1-end: #00C9A7;   /* xanh ngọc */
-  --chart-2: #3A4A5E;       /* xám đậm */
-  --bg-color: #0f1a2e;      /* nền trong vòng */
+  /* Làm ô ngày vuông hơn, đỡ bị dẹt */
+  .fc .fc-daygrid-day-frame {
+    min-height: 60px;
+  }
 }
 
 body {

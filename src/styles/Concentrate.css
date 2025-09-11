@@ -1,10 +1,7 @@
 .con-card {
   position: relative;
   width: 320px;
-  height: 690px;  
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* align-items: center; */
+  height: 690px;
   margin: 10px auto;
   background: var(--bg-color);
   color: var(--text-color);
@@ -14,13 +11,46 @@
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--text-color);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: snowFall 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 .con-head {
   display: flex;
+  align-items: center;
+  justify-content: start;
   gap: 8px;
   margin-bottom: 6px;
+  margin-left: 6px;
 }
+
 
 .con-head h2 {
   margin: 0;

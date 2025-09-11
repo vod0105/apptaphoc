@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { db, auth } from "../firebase";
 import { collection, setDoc, updateDoc, doc, getDoc, Timestamp } from "firebase/firestore";
 import "../styles/Concentrate.css";
 import { MoreVertical } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import Snowflakes from "../components/Snow";
 
 export default function Concentrate() {
   const { state } = useLocation();
@@ -42,8 +43,8 @@ export default function Concentrate() {
     "Người chiến thắng là người không bao giờ bỏ cuộc."
   ];
 
-    const { theme, toggleTheme } = useTheme();
-  
+  const { theme, toggleTheme } = useTheme();
+
 
   // Random 1 câu khi load trang
   useEffect(() => {
@@ -208,6 +209,8 @@ export default function Concentrate() {
   return (
     <div className="con-container">
       <div className="con-card">
+
+        <Snowflakes/>
         {/* Header */}
         <div className="con-head">
           <span className="con-dot">◆</span>

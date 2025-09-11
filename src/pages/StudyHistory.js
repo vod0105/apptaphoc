@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { collection, query, where, getDocs, Timestamp } from "firebase/firestore";
+import { collection, query, where, getDocs, Timestamp, writeBatch } from "firebase/firestore";
 import {
     ResponsiveContainer,
     LineChart,
@@ -144,6 +144,48 @@ function StudyHistory() {
     };
 
 
+    const handleDeleteAll = async () => {
+        if (window.confirm("Bạn có chắc muốn xóa tất cả dữ liệu học tập?")) {
+            const q = query(
+                collection(db, "studySessions"),
+                where("userId", "==", auth.currentUser.uid)
+            );
+            const snapshot = await getDocs(q);
+            const batch = writeBatch(db);
+            snapshot.forEach((doc) => {
+                batch.delete(doc.ref);
+            });
+            await batch.commit();
+            setSessions([]);
+            setDailyData([]);
+            setJobData([]);
+        }
+    };
+    const handleDelteOld = async () => {
+        if (window.confirm("Bạn có chắc muốn xóa dữ liệu học tập cũ (trước 7 ngày)?")) {
+            const sevenDaysAgo = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
+            try {
+                const q = query(
+                    collection(db, "studySessions"),
+                    where("userId", "==", auth.currentUser.uid),
+                    where("createdAt", "<", Timestamp.fromDate(sevenDaysAgo))
+                );
+                const snapshot = await getDocs(q);
+                const batch = writeBatch(db);
+                snapshot.forEach((doc) => {
+                    batch.delete(doc.ref);
+                });
+                await batch.commit();
+                setSessions([]);
+                setDailyData([]);
+                setJobData([]);
+            } catch (err) {
+                console.error("Error deleting old sessions:", err);
+            }
+        }
+    };
+
+
     return (
         <div className="history-container">
             <h1 className="main-title">📖 Lịch sử học tập</h1>
@@ -219,6 +261,13 @@ function StudyHistory() {
                         <Bar dataKey="actual" fill="#82ca9d" name="Thực tế" />
                     </BarChart>
                 </ResponsiveContainer>
+            </div>
+
+            {/* xóa dữ liệu */}
+            <h2 className="chart-title"> 🗑️ Dọn dẹp dữ liệu</h2>
+            <div className="delete-buttons">
+                <button className="delete-btn" onClick={handleDeleteAll}>Xóa tất cả</button>
+                <button className="delete-btn" onClick={handleDelteOld}>Xóa dữ liệu cũ (trước 7 ngày)</button>
             </div>
         </div>
     );

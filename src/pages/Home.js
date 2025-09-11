@@ -1,5 +1,5 @@
 import React, { useState, useEffect, use } from "react";
-import { FaBookOpen, FaPencilAlt, FaGlobe, FaCalculator, FaHistory, FaPlay, FaCalendar } from "react-icons/fa";
+import { FaPlay, FaCalendar, FaHistory, FaPage4 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db, googleProvider } from "../firebase";
@@ -194,15 +194,21 @@ function Home() {
       </div>
 
       {/* Start + History */}
-      <button className="start-button" onClick={handleStart}>
-        <FaPlay className="play-icon" /> Start
-      </button>
-      <button className="history-button" onClick={handleHistory}>
-        <FaHistory className="history-icon" /> History
-      </button>
-      <button className="calendar-button" onClick={handleCalender}>
-        <FaCalendar color="#2a98edff" className="calendar-icon" />
-      </button>
+<div className="bottom-nav">
+  <button className="start-btn" onClick={handleStart}>
+    <div className="play-icon"><FaPlay/></div>
+  </button>
+  <button className="left-btn" onClick={handleCalender}>
+    <FaCalendar />
+    Calendar
+    </button>
+  <button className="right-btn" onClick={handleHistory}>
+    <FaHistory />
+    History
+  </button>
+</div>
+
+
       {/* Toggle theme */}
       <button className="theme-toggle" onClick={toggleTheme}>
         {theme === "light" ? "🌙" : "☀️"}

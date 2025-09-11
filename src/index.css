@@ -42,6 +42,19 @@ body.light {
   --bg-color: #ffffff;
   /* nền trong vòng (trắng) */
 
+  /* nav bar */
+  --botton-bar-linear1: #3b82f6;
+  --botton-bar-linear2: #60a5fa;
+
+  --start-bar-linear1: #60a5fa;
+  --start-bar-linear2: #3b82f6;
+
+  --play-bar-linear1: #3b82f6;
+  --play-bar-linear2: #2563eb;
+
+  --color-left-right: #e0f2fe;
+  --color-left-right-hover: #ffffff;
+  
 }
 
 /* 🌚 Dark Theme */
@@ -81,6 +94,19 @@ body.dark {
   /* xám đậm */
   --bg-color: #0f1a2e;
   /* nền trong vòng */
+
+  /* nav bar */
+  --botton-bar-linear1: #0f172a;
+  --botton-bar-linear2: #1e293b;
+
+  --start-bar-linear1: #06b6d4;
+  --start-bar-linear2: #0ea5e9;
+
+  --play-bar-linear1: #06b6d4;
+  --play-bar-linear2: #0284c7;
+  
+  --color-left-right: #94a3b8;
+  --color-left-right-hover: #e2e8f0;
 }
 
 :root {

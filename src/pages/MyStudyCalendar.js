@@ -228,7 +228,7 @@ export default function MyStudyCalendar({ events }) {
         <>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
+                initialView="timeGridWeek"
                 headerToolbar={{
                     left: "prev,next today",
                     center: "title",

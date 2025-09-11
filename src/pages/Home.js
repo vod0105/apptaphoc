@@ -194,19 +194,19 @@ function Home() {
       </div>
 
       {/* Start + History */}
-<div className="bottom-nav">
-  <button className="start-btn" onClick={handleStart}>
-    <div className="play-icon"><FaPlay/></div>
-  </button>
-    <button className="left-btn" onClick={handleHistory}>
-    <FaHistory />
-    History
-  </button>
-  <button className="right-btn" onClick={handleCalender}>
-    <FaCalendar />
-    Calendar
-    </button>
-</div>
+      <div className="bottom-nav">
+        <button className="start-btn" onClick={handleStart}>
+          <div className="play-icon"><FaPlay /></div>
+        </button>
+        <button className="left-btn" onClick={handleHistory}>
+          <FaHistory />
+          History
+        </button>
+        <button className="right-btn" onClick={handleCalender}>
+          <FaCalendar />
+          Calendar
+        </button>
+      </div>
 
 
       {/* Toggle theme */}

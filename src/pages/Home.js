@@ -198,14 +198,14 @@ function Home() {
   <button className="start-btn" onClick={handleStart}>
     <div className="play-icon"><FaPlay/></div>
   </button>
-  <button className="left-btn" onClick={handleCalender}>
-    <FaCalendar />
-    Calendar
-    </button>
-  <button className="right-btn" onClick={handleHistory}>
+    <button className="left-btn" onClick={handleHistory}>
     <FaHistory />
     History
   </button>
+  <button className="right-btn" onClick={handleCalender}>
+    <FaCalendar />
+    Calendar
+    </button>
 </div>
 
 

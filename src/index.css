@@ -55,6 +55,7 @@ body.light {
   --color-left-right: #e0f2fe;
   --color-left-right-hover: #ffffff;
   
+  --color-calendar: #22c55e;
 }
 
 /* 🌚 Dark Theme */
@@ -107,6 +108,8 @@ body.dark {
   
   --color-left-right: #94a3b8;
   --color-left-right-hover: #e2e8f0;
+
+  --color-calendar: #4CAF50;
 }
 
 :root {
@@ -120,7 +123,6 @@ body.dark {
   --fc-button-hover-bg-color: #66a4fa;
 
   --fc-today-bg-color: #fef3c7;
-  --fc-event-bg-color: #22c55e;
   --fc-event-text-color: #fff;
 }
 
@@ -141,6 +143,11 @@ body.dark {
   /* đen */
 }
 
+.fc-timegrid-slot-label {
+    color: var(--text-color); /* Màu trắng */
+    /* Hoặc thử: color: #D3D3D3; /* Màu xám nhạt */
+}
+
 .fc .fc-toolbar-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -159,7 +166,7 @@ body.dark {
   padding: 2px 6px;
   border-radius: 6px;
   font-size: 0.85rem;
-  color: #22c55e;
+  color: var(--text-color);
 }
 
 @media (max-width: 430px) {

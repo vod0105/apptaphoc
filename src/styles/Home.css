@@ -233,15 +233,11 @@
 }
 
 @media (max-width: 768px) {
-  .start-btn {
-    width: 70px;
-    height: 70px;
-    top: -20px;
-  }
   .play-icon {
     width: 45px !important;
     height: 45px;
     font-size: 24px; /* Điều chỉnh kích thước biểu tượng */
+    padding: 8px 18px; ;
   }
 }
 /* Nút hai bên */

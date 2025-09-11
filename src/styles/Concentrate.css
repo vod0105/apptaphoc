@@ -1,11 +1,11 @@
 .con-card {
   position: relative;
-  width: 310px;
+  width: 320px;
   height: 690px;  
   /* display: flex; */
   /* flex-direction: column; */
   /* align-items: center; */
-  margin: 0 auto;
+  margin: 10px auto;
   background: var(--bg-color);
   color: var(--text-color);
   padding: 18px 18px 24px;

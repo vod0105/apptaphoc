@@ -22,8 +22,8 @@
 .modal h3 {
   margin-top: 0;
   margin-bottom: 16px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 27px;
+  font-weight: 700;
   text-align: center;
   color: #f2b40bdf;
 }
@@ -62,6 +62,7 @@
   align-items: center;
   gap: 2px;
   font-size: 10px;
+  color: #333 !important;
 }
 
 .modal-buttons {
@@ -97,7 +98,11 @@
 .modal button.cancel:hover {
   background: #e0e0e0;
 }
-
+.modal label{
+  color:  #c69306df;
+  font-weight: 500;
+  font-size: 15px;
+}
 /* Hiệu ứng */
 @keyframes fadeIn {
   from { opacity: 0; }

@@ -5,6 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from './context/ThemeContext';
 
+// Đăng ký service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('Service Worker registered successfully:', registration);
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider>

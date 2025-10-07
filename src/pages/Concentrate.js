@@ -44,6 +44,7 @@ export default function Concentrate() {
   ];
 
   const { theme, toggleTheme } = useTheme();
+  const [endTime, setEndTime] = useState(null); // Thời điểm kết thúc thực tế (timestamp)
 
 
   // Random 1 câu khi load trang
@@ -59,6 +60,10 @@ export default function Concentrate() {
     if (p.length > 0) setSecondsLeft(p[0].minutes * 60);
     setCurrentIndex(0);
     setIsRunning(true);
+    const firstSeconds = p[0].minutes * 60;
+    setSecondsLeft(firstSeconds);
+    setEndTime(Date.now() + firstSeconds * 1000); // 🔥 phải có dòng này
+
 
     const handleSession = async () => {
       if (!userId) return;
@@ -101,56 +106,72 @@ export default function Concentrate() {
     handleSession();
   }, []);
 
-  // Timer countdown và cập nhật thời gian học
   useEffect(() => {
-    if (!isRunning || secondsLeft <= 0) return;
+    if (!isRunning || !endTime || !periods[currentIndex]) return; // ✅ THÊM DÒNG NÀY
 
     const id = setInterval(() => {
-      setSecondsLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(id);
-          // Cập nhật Firestore khi focus period hoàn thành
-          const updateSession = async () => {
-            if (userId && sessionId && periods[currentIndex].type === "focus") {
-              try {
-                const sessionRef = doc(db, "studySessions", sessionId);
-                const newActualFocusMinutes = actualFocusMinutes + periods[currentIndex].minutes;
-                const newRemainingMinutes = initialMinutes - newActualFocusMinutes;
-                await updateDoc(sessionRef, {
-                  actualFocusMinutes: newActualFocusMinutes,
-                  remainingMinutes: newRemainingMinutes >= 0 ? newRemainingMinutes : 0,
-                  updatedAt: Timestamp.now(),
-                });
-                setActualFocusMinutes(newActualFocusMinutes);
-              } catch (error) {
-                console.error("Lỗi khi cập nhật phiên học:", error);
-              }
+      const now = Date.now();
+      const diff = Math.max(0, Math.floor((endTime - now) / 1000));
+      setSecondsLeft(diff);
+
+      if (diff <= 0) {
+        clearInterval(id);
+
+        // --- Cập nhật Firestore ---
+        const updateSession = async () => {
+          if (userId && sessionId && periods[currentIndex].type === "focus") {
+            try {
+              const sessionRef = doc(db, "studySessions", sessionId);
+              const newActualFocusMinutes = actualFocusMinutes + periods[currentIndex].minutes;
+              const newRemainingMinutes = initialMinutes - newActualFocusMinutes;
+
+              await updateDoc(sessionRef, {
+                actualFocusMinutes: newActualFocusMinutes,
+                remainingMinutes: newRemainingMinutes >= 0 ? newRemainingMinutes : 0,
+                updatedAt: Timestamp.now(),
+              });
+
+              setActualFocusMinutes(newActualFocusMinutes);
+            } catch (error) {
+              console.error("Lỗi khi cập nhật phiên học:", error);
             }
-          };
-          updateSession();
-
-          // 🔔 PHÁT ÂM THANH
-          if (periods[currentIndex].type === "focus") {
-            breakSound.play(); // Hết focus thì nghỉ
-          } else {
-            focusSound.play(); // Hết break thì vào học
           }
+        };
+        updateSession();
 
-          // Chuyển sang period tiếp theo
-          if (currentIndex < periods.length - 1) {
-            const nextIndex = currentIndex + 1;
-            setCurrentIndex(nextIndex);
-            setSecondsLeft(periods[nextIndex].minutes * 60);
-            return periods[nextIndex].minutes * 60;
-          }
-          return 0;
+        // --- Phát âm thanh ---
+        if (periods[currentIndex].type === "focus") {
+          breakSound.play(); // Hết focus thì nghỉ
+        } else {
+          focusSound.play(); // Hết break thì học
         }
-        return prev - 1;
-      });
+
+        // --- Chuyển sang period kế ---
+        if (currentIndex < periods.length - 1) {
+          const nextIndex = currentIndex + 1;
+          setCurrentIndex(nextIndex);
+          const nextSeconds = periods[nextIndex].minutes * 60;
+          setSecondsLeft(nextSeconds);
+          setEndTime(Date.now() + nextSeconds * 1000);
+        } else {
+          setSecondsLeft(0);
+          setEndTime(null);
+        }
+      }
     }, 1000);
 
     return () => clearInterval(id);
-  }, [isRunning, secondsLeft, currentIndex, periods, userId, sessionId, actualFocusMinutes, initialMinutes]);
+  }, [
+    isRunning,
+    endTime,
+    currentIndex,
+    periods,
+    userId,
+    sessionId,
+    actualFocusMinutes,
+    initialMinutes,
+  ]);
+
 
   // Tách thời gian thành các periods
   const splitIntoPeriods = (totalMinutes) => {
@@ -206,11 +227,26 @@ export default function Concentrate() {
     );
   }
 
+  const handleToggle = () => {
+    if (isRunning) {
+      // --- Tạm dừng ---
+      setIsRunning(false);
+      setEndTime(null); // Xóa endTime để dừng bộ đếm
+    } else {
+      // --- Tiếp tục hoặc bắt đầu mới ---
+      const newEnd = Date.now() + secondsLeft * 1000;
+      setEndTime(newEnd);
+      setIsRunning(true);
+    }
+  };
+
+  if (!periods.length || !periods[currentIndex]) return <div>Đang khởi tạo...</div>;
+
   return (
     <div className="con-container">
       <div className="con-card">
 
-        <Snowflakes/>
+        <Snowflakes />
         {/* Header */}
         <div className="con-head">
           <span className="con-dot">◆</span>
@@ -354,7 +390,7 @@ export default function Concentrate() {
           {!(secondsLeft === 0 && currentIndex === periods.length - 1) && (
             <button
               className={`con-btn ${isRunning ? "pause" : "start"}`}
-              onClick={() => setIsRunning((v) => !v)}
+              onClick={handleToggle}
               aria-label={isRunning ? "Pause" : "Start"}
             >
               <span className="con-btn-icon">{isRunning ? "⏸" : "▶"}</span>

@@ -36,7 +36,8 @@ export default function MyStudyCalendar({ events }) {
                 const q1 = query(
                     collection(db, "studySessions"),
                     where("userId", "==", auth.currentUser.uid),
-                    where("createdAt", ">=", Timestamp.fromDate(thirtyDaysAgo))
+                    where("createdAt", ">=", Timestamp.fromDate(thirtyDaysAgo)),
+                    where("repeat", "==", "none")
                 );
 
                 // Query 2: tất cả weekly and daily repeat
@@ -211,6 +212,7 @@ export default function MyStudyCalendar({ events }) {
                     remainingMinutes: initialMinutes,
                     createdAt: startDate,
                     updatedAt: startDate,
+                    repeat: "none",
                 };
                 console.log("Session Data to be saved:", sessionData);
                 await setDoc(docRef, sessionData);
@@ -350,9 +352,6 @@ export default function MyStudyCalendar({ events }) {
         setModalUpdateOpen(true);
     };
 
-    useEffect(() => {
-        console.log("sessions updated:", sessions);
-    }, [sessions]);
     return (
         <>
             <FullCalendar

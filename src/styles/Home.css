@@ -26,11 +26,12 @@
 /* Tiêu đề chính */
 .main-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--text-color) !important;
-  line-height: 1.3;
+  line-height: 1.7;
+  margin-top: 0px;
   letter-spacing: 0.03em;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
@@ -190,7 +191,7 @@
   padding: 0 40px;
   border-radius: 20px;
   overflow: visible;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Nút Start nổi */
@@ -209,14 +210,14 @@
   justify-content: center;
   color: white;
   font-size: 26px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .start-btn:hover {
   transform: translateX(-50%) scale(1.05);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
 }
 
 .play-icon {
@@ -236,17 +237,21 @@
   .play-icon {
     width: 45px !important;
     height: 45px;
-    font-size: 24px; /* Điều chỉnh kích thước biểu tượng */
-    padding: 8px 18px; ;
+    font-size: 24px;
+    /* Điều chỉnh kích thước biểu tượng */
+    padding: 8px 18px;
+    ;
   }
 }
+
 /* Nút hai bên */
 .left-btn,
 .right-btn {
   background: none;
   border: none;
   font-size: 14px;
-  color: var(--color-left-right); /* xanh nhạt để dịu */
+  color: var(--color-left-right);
+  /* xanh nhạt để dịu */
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -257,16 +262,20 @@
 
 .left-btn:hover,
 .right-btn:hover {
-  color: var(--color-left-right-hover); /* hover sáng hơn */
+  color: var(--color-left-right-hover);
+  /* hover sáng hơn */
 }
 
 /* Login */
 .login-button {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  padding: 10px 16px;
+  position: absolute;
+  top: 30px;
+  left: 30px;
   border: none;
   border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   cursor: pointer;
   font-weight: bold;
 }
@@ -277,14 +286,16 @@
 
 /* User */
 .user-section {
-  position: relative;
+  position: absolute;
+  top: 25px;
+  left: 25px;
   display: inline-block;
   margin-bottom: 0px;
 }
 
 .user-avatar {
-  width: 48px;
-  height: 48px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid var(--border-color);
@@ -292,7 +303,7 @@
 
 .logout-button {
   position: absolute;
-  top: 60px;
+  top: 40px;
   left: 0;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -310,11 +321,90 @@
   right: 20px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 30px;
   cursor: pointer;
   color: var(--icon-color);
 }
 
 .theme-toggle:hover {
   color: var(--icon-hover);
+}
+/* Container cuộn ngang */
+.session-list-today {
+  display: flex;
+  flex-direction: row;   /* xếp ngang */
+  gap: 12px;             /* khoảng cách giữa các card */
+  overflow-x: auto;      /* bật scroll ngang */
+  overflow-y: hidden;    /* ẩn scroll dọc */
+  padding: 10px 0;
+  white-space: nowrap;   /* không cho xuống dòng */
+  scrollbar-width: thin; /* Firefox */
+  width: 100%;
+}
+
+/* Thanh cuộn ngang cho Chrome/Safari */
+.session-list-today::-webkit-scrollbar {
+  height: 6px; /* thanh ngang */
+}
+.session-list-today::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+.session-list-today::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Card (button) */
+.session-card-btn-today {
+  flex: 0 0 auto;           /* không co lại */
+  width: 120px;             /* cố định chiều rộng */
+  height: 120px;            /* cố định chiều cao */
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--card-bg, #fff);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* căn nội dung đều */
+}
+
+.session-card-btn-today:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.session-job-today {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--text-color);
+}
+
+.session-date-today {
+  font-size: 13px;
+  color: var(--text-color);
+  margin-bottom: 3px;
+}
+
+/* Progress bar */
+.progress-bar-today {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background: #eee;
+  overflow: hidden;
+}
+
+.progress-fill-today {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  line-height: 20px;
 }

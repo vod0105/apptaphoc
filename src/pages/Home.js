@@ -7,6 +7,7 @@ import "../styles/Home.css";
 import defaultAvatar from "../assets/defaultAvatar.jpg";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { useTheme } from "../context/ThemeContext";
+import { FaSignInAlt } from "react-icons/fa";
 
 
 function Home() {
@@ -17,7 +18,7 @@ function Home() {
   const [user, setUser] = useState(null); // user login state
   const [showLogout, setShowLogout] = useState(false);
   const [jobs, setJobs] = useState([{ id: 1, name: "General" }]); // jobs from firestore
-
+  const [todaySessions, setTodaySessions] = useState([]); // today's study sessions
   const { theme, toggleTheme } = useTheme();
 
 
@@ -43,17 +44,74 @@ function Home() {
             where("createdAt", "<=", endOfDay)
           );
 
-          const snapshot = await getDocs(q);
-
+          // Query 2: tất cả weekly and daily repeat
+          const q2 = query(
+            collection(db, "studySessions"),
+            where("userId", "==", auth.currentUser.uid),
+            where("repeat", "in", ["weekly", "daily"])
+          );
+          const [snapshot, snapshotRepeat] = await Promise.all([
+            getDocs(q),
+            getDocs(q2)
+          ]);
           let totalMinutes = 0;
+          let sessions = [];
+
           snapshot.forEach((doc) => {
             const data = doc.data();
+            sessions.push({ id: doc.id, ...data }); // thêm vào danh sách
             if (data.actualFocusMinutes) {
               totalMinutes += data.actualFocusMinutes;
             }
           });
 
+          snapshotRepeat.forEach((doc) => {
+            const data = doc.data();
+            if (data.daysOfWeek.includes(now.getDay())) {
+
+            }
+
+          });
+
+
           setTodayStudyTime(totalMinutes);
+          setTodaySessions(sessions);
+
+          if ('serviceWorker' in navigator && 'PushManager' in window) {
+            navigator.serviceWorker.ready.then(registration => {
+              registration.pushManager.getSubscription().then(subscription => {
+                if (subscription) {
+                  const checkSchedule = () => {
+                    const now = new Date();
+                    sessions.forEach(session => {
+                      const sessionTime = session.createdAt?.toDate ? session.createdAt.toDate().getTime() : null;
+                      if (sessionTime) {
+                        const fiveMinutesBefore = sessionTime - 5 * 60 * 1000;
+                        if (now.getTime() >= fiveMinutesBefore && now.getTime() < sessionTime) {
+                          fetch('/send-notification', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                              subscription: subscription,
+                              title: 'Nhắc nhở học tập',
+                              body: `Bạn sắp bắt đầu phiên học: ${session.name || 'Chưa có tên'} lúc ${new Date(sessionTime).toLocaleTimeString()}`,
+                              url: '/Home'
+                            }),
+                            headers: { 'Content-Type': 'application/json' }
+                          }).catch(err => console.error('Lỗi gửi thông báo:', err));
+                        }
+                      }
+                    });
+                  };
+
+                  // Kiểm tra mỗi phút
+                  const interval = setInterval(checkSchedule, 60000);
+                  checkSchedule(); // Kiểm tra ngay khi mount
+                  return () => clearInterval(interval); // Dọn dẹp khi unmount
+                }
+              });
+            });
+          }
+
         } catch (err) {
           console.error("Error fetching today's study time:", err);
         }
@@ -135,17 +193,30 @@ function Home() {
     navigate("/my-study-calendar");
   }
 
+  const handleContinue = (session) => {
+    if (!session.userId) {
+      console.warn("Không có userId, không thể tiếp tục.");
+      return;
+    }
+
+    // Có userId thì mới điều hướng hoặc cập nhật
+    navigate("/concentrate", {
+      state: {
+        focusTime: session.remainingMinutes,
+        selectedJob: session.job,
+        userId: session.userId,
+        sectionId: session.id,
+      },
+    });
+  }
+
   return (
     <div className="app-container">
       <h1 className="main-title">FocusTime</h1>
-      <p className="today-time">
-        Thời gian học hôm nay: <strong>{formatStudyTime(todayStudyTime)}</strong>
-      </p>
-
       {/* Nếu chưa đăng nhập */}
       {!user ? (
         <button className="login-button" onClick={handleGoogleLogin}>
-          Đăng nhập bằng Google
+          <FaSignInAlt className="text-black text-xl" />
         </button>
       ) : (
         <div className="user-section">
@@ -162,6 +233,45 @@ function Home() {
           )}
         </div>
       )}
+      <p className="today-time">
+        Thời gian học hôm nay: <strong>{formatStudyTime(todayStudyTime)}</strong>
+      </p>
+      <div className="session-list-today">
+        {todaySessions.length > 0 ? (
+          todaySessions.map((session) => {
+            const percent = Math.min(
+              Math.round((session.actualFocusMinutes / session.totalFocusMinutes) * 100),
+              100
+            );
+
+            return (
+              <button
+                key={session.id}
+                className="session-card-btn-today"
+                onClick={() => handleContinue(session)}
+              >
+                <h3 className="session-job-today">📘 {session.job}</h3>
+                <p className="session-date-today">
+                  {session.createdAt.toDate().toLocaleString().split(", ")[1]}
+                </p>
+
+                <div className="progress-container-today">
+                  <div className="progress-bar-today">
+                    <div
+                      className="progress-fill-today"
+                      style={{ width: `${percent}%` }}
+                    >
+                      {percent}%
+                    </div>
+                  </div>
+                </div>
+              </button>
+            );
+          })
+        ) : (
+          <p>Chưa có phiên học nào hôm nay.</p>
+        )}
+      </div>
 
       {/* Job chọn */}
       <div className="job-header">

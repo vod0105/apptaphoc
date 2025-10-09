@@ -146,6 +146,17 @@ export default function Concentrate() {
           focusSound.play(); // Hết break thì học
         }
 
+        if ('Notification' in window && Notification.permission === 'granted') {
+          if (currentIndex < periods.length - 1) {
+            new Notification(
+              periods[currentIndex].type === "focus"
+                ? "Đã hết thời gian tập trung! Đến giờ nghỉ rồi."
+                : "Đã hết giờ nghỉ! Quay lại tập trung nhé."
+            );
+          } else {
+            new Notification("Chúc mừng bạn đã hoàn thành phiên học! 🎉");
+          }
+        }
         // --- Chuyển sang period kế ---
         if (currentIndex < periods.length - 1) {
           const nextIndex = currentIndex + 1;

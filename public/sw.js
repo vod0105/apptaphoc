@@ -1,9 +1,9 @@
-self.addEventListener('push', function(event) {
+self.addEventListener('push', function (event) {
   const data = event.data.json();
   const options = {
     body: data.body,
-    icon: '/icon-192.png',
-    badge: '/badge.png',
+    icon: '/logohoctap.png',
+    badge: '/logohoctap.png',
     data: { url: data.url }
   };
   event.waitUntil(
@@ -11,7 +11,7 @@ self.addEventListener('push', function(event) {
   );
 });
 
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', function (event) {
   event.notification.close();
   event.waitUntil(
     clients.openWindow(event.notification.data.url)

@@ -18,15 +18,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Yêu cầu quyền thông báo khi trang tải
-if ('Notification' in window) {
-  Notification.requestPermission().then(permission => {
-    if (permission === 'granted') {
-      new Notification('Bạn đã bật thông báo thành công!');
-    }
-  });
-}
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider>

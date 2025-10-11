@@ -210,6 +210,28 @@ function Home() {
     });
   }
 
+  const requestNotificationPermission = () => {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Đã cấp phép thông báo');
+        navigator.serviceWorker.ready.then(registration => {
+          registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: 'YOUR_VAPID_PUBLIC_KEY'
+          }).then(subscription => {
+            fetch('/subscribe', {
+              method: 'POST',
+              body: JSON.stringify(subscription),
+              headers: { 'Content-Type': 'application/json' }
+            });
+          });
+        });
+      }
+    });
+  }
+};
+
   return (
     <div className="app-container">
       <h1 className="main-title">FocusTime</h1>
@@ -227,9 +249,15 @@ function Home() {
             onClick={() => setShowLogout((prev) => !prev)}
           />
           {showLogout && (
-            <button className="logout-button" onClick={handleLogout}>
-              Logout
-            </button>
+            <div className="user-menu">
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
+              <button className="notification-button" onClick={requestNotificationPermission}>
+                Notification
+              </button>
+            </div>
+
           )}
         </div>
       )}

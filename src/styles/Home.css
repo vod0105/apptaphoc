@@ -301,19 +301,46 @@
   border: 2px solid var(--border-color);
 }
 
-.logout-button {
+.user-menu {
   position: absolute;
-  top: 40px;
-  left: 0;
+  top: 48px;
+  left: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  color: var(--text-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 8px;
+  z-index: 100;
+  min-width: 100px;
+  animation: fadeIn 0.2s ease;
 }
 
+.logout-button,
+.notification-button {
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background 0.2s, color 0.2s;
+}
+
+.logout-button:hover,
+.notification-button:hover {
+  background: var(--accent-bg);
+  color: var(--accent-color);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 /* Theme toggle */
 .theme-toggle {
   position: absolute;

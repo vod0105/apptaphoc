@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Concentrate from './pages/Concentrate';
 import StudyHistory from './pages/StudyHistory';
@@ -6,6 +7,38 @@ import ManageJobs from './pages/ManageJobs';
 import MyStudyCalendar from './pages/MyStudyCalendar';
 
 function App() {
+  const [notificationPermissionRequested, setNotificationPermissionRequested] = useState(false);
+
+  useEffect(() => {
+    // Chỉ yêu cầu quyền lần đầu khi PWA được mở từ Home Screen
+    if ('Notification' in window && !notificationPermissionRequested && window.matchMedia('(display-mode: standalone)').matches) {
+      const requestPermission = () => {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            console.log('Đã cấp phép thông báo');
+            navigator.serviceWorker.ready.then(registration => {
+              registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'YOUR_VAPID_PUBLIC_KEY' // Thay bằng key thực
+              }).then(subscription => {
+                fetch('/subscribe', {
+                  method: 'POST',
+                  body: JSON.stringify(subscription),
+                  headers: { 'Content-Type': 'application/json' }
+                }).then(() => console.log('Đăng ký subscription thành công'))
+                  .catch(err => console.error('Lỗi đăng ký:', err));
+              }).catch(err => console.error('Lỗi subscribe:', err));
+            });
+          }
+          setNotificationPermissionRequested(true); // Đánh dấu đã yêu cầu
+        });
+      };
+
+      // Kích hoạt yêu cầu quyền (cần hành động người dùng trên iOS)
+      requestPermission(); // Gọi trực tiếp để test, nhưng nên gắn vào nút trong production
+    }
+  }, [notificationPermissionRequested]);
+
   return (
     <BrowserRouter>
       <Routes>

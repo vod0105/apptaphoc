@@ -9,6 +9,13 @@ const vapidKeys = {
 };
 webpush.setVapidDetails('mailto:your-email@domain.com', vapidKeys.publicKey, vapidKeys.privateKey);
 
+let subscriptions = [];
+
+app.post('/subscribe', (req, res) => {
+  subscriptions.push(req.body);
+  res.status(201).json();
+});
+
 app.post('/send-notification', (req, res) => {
   const { subscription, title, body, url } = req.body;
   webpush.sendNotification(subscription, JSON.stringify({

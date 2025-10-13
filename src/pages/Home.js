@@ -30,6 +30,36 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+  navigator.serviceWorker.ready.then(registration => {
+    registration.pushManager.getSubscription().then(subscription => {
+      if (subscription) {
+        // Gửi subscription lên server
+        fetch('http://localhost:3001/subscribe', {
+          method: 'POST',
+          body: JSON.stringify(subscription),
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(err => console.error('Lỗi subscribe:', err));
+
+        // Gửi lịch lên server
+        const schedule = [
+          {
+            time: new Date('2025-10-13T09:30:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
+            name: 'Học tập buổi sáng'
+          }
+        ];
+        fetch('http://localhost:3001/set-schedule', {
+          method: 'POST',
+          body: JSON.stringify({ schedule }),
+          headers: { 'Content-Type': 'application/json' }
+        }).catch(err => console.error('Lỗi gửi lịch:', err));
+      }
+    });
+  });
+}
+  }, []);
+
+  useEffect(() => {
     if (user) {
       const fetchTodayStudyTime = async () => {
         try {

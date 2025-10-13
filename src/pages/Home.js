@@ -35,7 +35,7 @@ function Home() {
     registration.pushManager.getSubscription().then(subscription => {
       if (subscription) {
         // Gửi subscription lên server
-        fetch('http://localhost:3001/subscribe', {
+        fetch('/api/push/subscribe', {
           method: 'POST',
           body: JSON.stringify(subscription),
           headers: { 'Content-Type': 'application/json' }
@@ -44,11 +44,11 @@ function Home() {
         // Gửi lịch lên server
         const schedule = [
           {
-            time: new Date('2025-10-13T09:30:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
+            time: new Date('2025-10-13T10:00:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
             name: 'Học tập buổi sáng'
           }
         ];
-        fetch('http://localhost:3001/set-schedule', {
+        fetch('/api/push/set-schedule', {
           method: 'POST',
           body: JSON.stringify({ schedule }),
           headers: { 'Content-Type': 'application/json' }
@@ -107,40 +107,40 @@ function Home() {
           setTodayStudyTime(totalMinutes);
           setTodaySessions(sessions);
 
-          if ('serviceWorker' in navigator && 'PushManager' in window) {
-            navigator.serviceWorker.ready.then(registration => {
-              registration.pushManager.getSubscription().then(subscription => {
-                if (subscription) {
-                  const checkSchedule = () => {
-                    const now = new Date();
-                    sessions.forEach(session => {
-                      const sessionTime = session.createdAt?.toDate ? session.createdAt.toDate().getTime() : null;
-                      if (sessionTime) {
-                        const fiveMinutesBefore = sessionTime - 5 * 60 * 1000;
-                        if (now.getTime() >= fiveMinutesBefore && now.getTime() < sessionTime) {
-                          fetch('/send-notification', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                              subscription: subscription,
-                              title: 'Nhắc nhở học tập',
-                              body: `Bạn sắp bắt đầu phiên học: ${session.name || 'Chưa có tên'} lúc ${new Date(sessionTime).toLocaleTimeString()}`,
-                              url: '/Home'
-                            }),
-                            headers: { 'Content-Type': 'application/json' }
-                          }).catch(err => console.error('Lỗi gửi thông báo:', err));
-                        }
-                      }
-                    });
-                  };
+          // if ('serviceWorker' in navigator && 'PushManager' in window) {
+          //   navigator.serviceWorker.ready.then(registration => {
+          //     registration.pushManager.getSubscription().then(subscription => {
+          //       if (subscription) {
+          //         const checkSchedule = () => {
+          //           const now = new Date();
+          //           sessions.forEach(session => {
+          //             const sessionTime = session.createdAt?.toDate ? session.createdAt.toDate().getTime() : null;
+          //             if (sessionTime) {
+          //               const fiveMinutesBefore = sessionTime - 5 * 60 * 1000;
+          //               if (now.getTime() >= fiveMinutesBefore && now.getTime() < sessionTime) {
+          //                 fetch('/send-notification', {
+          //                   method: 'POST',
+          //                   body: JSON.stringify({
+          //                     subscription: subscription,
+          //                     title: 'Nhắc nhở học tập',
+          //                     body: `Bạn sắp bắt đầu phiên học: ${session.name || 'Chưa có tên'} lúc ${new Date(sessionTime).toLocaleTimeString()}`,
+          //                     url: '/Home'
+          //                   }),
+          //                   headers: { 'Content-Type': 'application/json' }
+          //                 }).catch(err => console.error('Lỗi gửi thông báo:', err));
+          //               }
+          //             }
+          //           });
+          //         };
 
-                  // Kiểm tra mỗi phút
-                  const interval = setInterval(checkSchedule, 60000);
-                  checkSchedule(); // Kiểm tra ngay khi mount
-                  return () => clearInterval(interval); // Dọn dẹp khi unmount
-                }
-              });
-            });
-          }
+          //         // Kiểm tra mỗi phút
+          //         const interval = setInterval(checkSchedule, 60000);
+          //         checkSchedule(); // Kiểm tra ngay khi mount
+          //         return () => clearInterval(interval); // Dọn dẹp khi unmount
+          //       }
+          //     });
+          //   });
+          // }
 
         } catch (err) {
           console.error("Error fetching today's study time:", err);

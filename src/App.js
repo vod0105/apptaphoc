@@ -19,7 +19,7 @@ function App() {
             navigator.serviceWorker.ready.then(registration => {
               registration.pushManager.subscribe({
                 userVisibleOnly: true,
-                applicationServerKey: 'YOUR_VAPID_PUBLIC_KEY' // Thay bằng key thực
+                applicationServerKey: 'BC5kR26ZaNi22hxjiOjGJb4VRf537r-ZEL3yhBfMpphjwmlAAYnLr3AoWHuIVfOV9sAyQlEF5LhT6yO9aYkXu-E' // Thay bằng key thực
               }).then(subscription => {
                 fetch('/subscribe', {
                   method: 'POST',

@@ -35,7 +35,7 @@ function Home() {
     registration.pushManager.getSubscription().then(subscription => {
       if (subscription) {
         // Gửi subscription lên server
-        fetch('/api/push/subscribe', {
+        fetch('/api/subscribe', {
           method: 'POST',
           body: JSON.stringify(subscription),
           headers: { 'Content-Type': 'application/json' }
@@ -44,11 +44,11 @@ function Home() {
         // Gửi lịch lên server
         const schedule = [
           {
-            time: new Date('2025-10-13T11:20:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
+            time: new Date('2025-10-13T11:40:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
             name: 'Học tập buổi sáng'
           }
         ];
-        fetch('/api/push/set-schedule', {
+        fetch('/api/set-schedule', {
           method: 'POST',
           body: JSON.stringify({ schedule }),
           headers: { 'Content-Type': 'application/json' }

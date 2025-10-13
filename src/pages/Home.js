@@ -31,32 +31,32 @@ function Home() {
 
   useEffect(() => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-  navigator.serviceWorker.ready.then(registration => {
-    registration.pushManager.getSubscription().then(subscription => {
-      if (subscription) {
-        // Gửi subscription lên server
-        fetch('/api/subscribe', {
-          method: 'POST',
-          body: JSON.stringify(subscription),
-          headers: { 'Content-Type': 'application/json' }
-        }).catch(err => console.error('Lỗi subscribe:', err));
+      navigator.serviceWorker.ready.then(registration => {
+        registration.pushManager.getSubscription().then(subscription => {
+          if (subscription) {
+            // Gửi subscription lên server
+            fetch('/api/subscribe', {
+              method: 'POST',
+              body: JSON.stringify(subscription),
+              headers: { 'Content-Type': 'application/json' }
+            }).catch(err => console.error('Lỗi subscribe:', err));
 
-        // Gửi lịch lên server
-        const schedule = [
-          {
-            time: new Date('2025-10-13T12:15:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
-            name: 'Học tập buổi sáng'
+            // Gửi lịch lên server
+            const schedule = [
+              {
+                time: new Date('2025-10-13T16:40:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
+                name: 'Học tập buổi sáng'
+              }
+            ];
+            fetch('/api/set-schedule', {
+              method: 'POST',
+              body: JSON.stringify({ schedule }),
+              headers: { 'Content-Type': 'application/json' }
+            }).catch(err => console.error('Lỗi gửi lịch:', err));
           }
-        ];
-        fetch('/api/set-schedule', {
-          method: 'POST',
-          body: JSON.stringify({ schedule }),
-          headers: { 'Content-Type': 'application/json' }
-        }).catch(err => console.error('Lỗi gửi lịch:', err));
-      }
-    });
-  });
-}
+        });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -241,26 +241,26 @@ function Home() {
   }
 
   const requestNotificationPermission = () => {
-  if ('Notification' in window) {
-    Notification.requestPermission().then(permission => {
-      if (permission === 'granted') {
-        console.log('Đã cấp phép thông báo');
-        navigator.serviceWorker.ready.then(registration => {
-          registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: 'YOUR_VAPID_PUBLIC_KEY'
-          }).then(subscription => {
-            fetch('/subscribe', {
-              method: 'POST',
-              body: JSON.stringify(subscription),
-              headers: { 'Content-Type': 'application/json' }
+    if ('Notification' in window) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Đã cấp phép thông báo');
+          navigator.serviceWorker.ready.then(registration => {
+            registration.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: 'BC5kR26ZaNi22hxjiOjGJb4VRf537r-ZEL3yhBfMpphjwmlAAYnLr3AoWHuIVfOV9sAyQlEF5LhT6yO9aYkXu-E' // Thay bằng key thực
+            }).then(subscription => {
+              fetch('/subscribe', {
+                method: 'POST',
+                body: JSON.stringify(subscription),
+                headers: { 'Content-Type': 'application/json' }
+              });
             });
           });
-        });
-      }
-    });
-  }
-};
+        }
+      });
+    }
+  };
 
   return (
     <div className="app-container">

@@ -44,7 +44,7 @@ function Home() {
         // Gửi lịch lên server
         const schedule = [
           {
-            time: new Date('2025-10-13T10:00:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
+            time: new Date('2025-10-13T10:10:00+07:00').getTime(), // 09:30 AM ngày 13/10/2025
             name: 'Học tập buổi sáng'
           }
         ];

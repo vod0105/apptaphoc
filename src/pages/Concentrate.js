@@ -22,8 +22,8 @@ export default function Concentrate() {
   const [sessionId, setSessionId] = useState(initSection); // Lưu ID của document phiên học
   const [actualFocusMinutes, setActualFocusMinutes] = useState(0);
   // Tạo audio object
-  const breakSound = new Audio("/sounds/break.mp3");
-  const focusSound = new Audio("/sounds/focus.mp3");
+  const breakSound = new Audio("/sounds/focus.mp3");
+  const focusSound = new Audio("/sounds/break.mp3");
 
   const [viewMode, setViewMode] = useState("circle"); // circle | tree | candle
   const [menuOpen, setMenuOpen] = useState(false);
